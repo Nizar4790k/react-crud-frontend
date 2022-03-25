@@ -28,7 +28,6 @@ useEffect(()=>{
    const authenticate = () =>{
 
     
-    
 
      if(!email || !password ){
         alert("The credentials are wrong");

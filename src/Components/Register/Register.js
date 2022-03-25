@@ -46,7 +46,7 @@ const Register = () => {
        
 
 
-        fetch(process.env.REACT_APP_PROXY+'/register', {
+        fetch(`${process.env.REACT_APP_PROXY}/registro`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
