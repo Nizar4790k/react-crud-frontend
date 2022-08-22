@@ -6,7 +6,6 @@ import "./Login.css";
 const Login = ({onLoadUser}) => {
 
     
-
     const[email,setEmail]=useState("");
     const[password,setPassword] = useState("");
      
@@ -17,7 +16,7 @@ const Login = ({onLoadUser}) => {
 useEffect(()=>{
      
     
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
      
      if(user){
          navigate('/ProductList')
@@ -52,16 +51,16 @@ useEffect(()=>{
                     break;
                 case "ACCESS_GRANTED":
                     
-                    localStorage.setItem('user',JSON.stringify(result.user));
+                    sessionStorage.setItem('user',JSON.stringify(result.user));
                     onLoadUser(result.user);
-                //navigate("/ProductList");
+                    navigate("/ProductList");
                     
                     break;
                  default:
                      alert("ERROR IN THE SERVER");
                      break;   
             }
-        });
+        }).catch(err=>console.log(err));
 
         
     

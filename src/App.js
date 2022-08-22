@@ -3,17 +3,25 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-
+import ProductList from './Components/Products/ProductList/ProductList';
 import './App.css';
+
 function App() {
 
   const  [user,setUser] = useState({});
 
   const onLoadUser = (user)=>{
-    localStorage.setItem('user',JSON.stringify(user));
+    sessionStorage.setItem('user',JSON.stringify(user));
     setUser(user);
     
   }
+
+  const onSignOut = ()=>{
+    sessionStorage.clear();
+    setUser({});
+
+  }
+
 
   return (
     <div>
@@ -22,6 +30,8 @@ function App() {
         <Route path="/" element={<Login onLoadUser={onLoadUser}/>}></Route>
         <Route path="/Login" element={<Login onLoadUser={onLoadUser}/>}></Route>
         <Route path="/Register" element={<Register/>} />
+        <Route path="/ProductList" element={<ProductList user={user} onSignOut={onSignOut}/>} />
+        
         </Routes>
       </Router>
     </div>
