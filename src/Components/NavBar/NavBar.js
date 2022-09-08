@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+
 const NavBar = ({ fullName, onSignOut, selectedTab }) => {
 
     const navigate = useNavigate();

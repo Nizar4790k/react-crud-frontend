@@ -1,18 +1,51 @@
-import react from "react";
+import react, { useEffect, useState } from "react";
 import NavBar from "../../NavBar/NavBar";
 import ProductItem from "../ProductItem/ProductItem";
+import { useNavigate } from "react-router";
 import "./ProductList.css";
 
 const ProductList = (props) => {
 
+    const [products, setProducts] = useState([]);
+
     const { user, onSignOut } = props;
 
+    const navigate = useNavigate();
+
+    /*
     const products = [
     {name:"Manzana Roja",price:10},
     {name:"Coca Cola",price:15},
     {name:"Pan",price:5},
     {name:"Pica Pollo",price:200}
     ]
+    */
+
+
+    useEffect(async () => {
+
+        const products = await getProducts();
+        console.log(products);
+        setProducts(products);
+
+    }, []);
+
+
+    const getProducts = async () => {
+
+        const response = await fetch(`${process.env.REACT_APP_PROXY}/products`);
+        const products = await response.json();
+
+        return products;
+
+    }
+
+
+    const goToCreateProduct = () => {
+        navigate('/ProductFormCreate');
+    }
+
+
 
     return (
         <div>
@@ -20,14 +53,14 @@ const ProductList = (props) => {
             <NavBar fullName={user.fullName} onSignOut={onSignOut} selectedTab="ProductList" />
             <h1>Lista de productos</h1>
 
-            <div class="container">
+            <div className="container">
                 <br />
                 <br />
-                <button type="button" class="btn btn-success btn-lg">Agregar Producto</button>
+                <button type="button" className="btn btn-success btn-lg" onClick={goToCreateProduct}>Agregar Producto</button>
                 <br />
                 <br />
-                <table class="table table-striped table-bordered table-hover">
-                    <thead class="thead-dark">
+                <table className="table table-striped table-bordered table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
@@ -36,11 +69,14 @@ const ProductList = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {products.map((product,row)=>{
-                            return <ProductItem product={product} row={row+1}/>
-                        })} 
-                        
+
+                        {products.map((product, row) => {
+                            console.log(product);
+                            return <ProductItem product={product} key={row + 1} row={row + 1} />
+                        })}
+
+
+
 
                     </tbody>
                 </table>

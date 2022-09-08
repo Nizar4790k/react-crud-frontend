@@ -1,16 +1,16 @@
 import react from "react";
 
-const ProductItem = ({ product,row}) => {
+const ProductItem = ({ product, row }) => {
 
     return (
-        
-            <tr>
-                <th scope="row">{row}</th>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                
-            </tr>
-        
+
+        <tr>
+            <th scope="row">{row}</th>
+            <td>{product.nombre}</td>
+            <td>{product.precio}</td>
+
+        </tr>
+
     );
 
 }
