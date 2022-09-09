@@ -33,7 +33,7 @@ const ProductList = (props) => {
 
     const getProducts = async () => {
 
-        const response = await fetch(`${process.env.REACT_APP_PROXY}/products`);
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/products`);
         const products = await response.json();
 
         return products;

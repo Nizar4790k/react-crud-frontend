@@ -12,7 +12,7 @@ const createProduct = async () => {
 
   const product = { nombre: nombre, precio: precio };
 
-  const response = await fetch(`${process.env.REACT_APP_PROXY}/products`, {
+  const response = await fetch(`${process.env.REACT_APP_SERVER}/products`, {
     method: "post",
     headers: {
       'Accept': 'application/json',
